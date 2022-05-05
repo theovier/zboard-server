@@ -10,9 +10,9 @@ class LoginController extends Controller {
 
     public function login(Request $request) {
         if (Auth::attempt($request->only(['email', 'password']))) {
-            return response(["success" => true], 200);
+            return response(status: 204);
         } else {
-            return response(["success" => false], 403);
+            return response(["msg" => "Credentials do not match"], 401);
         }
     }
 }
