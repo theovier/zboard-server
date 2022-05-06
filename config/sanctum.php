@@ -64,4 +64,6 @@ return [
         'encrypt_cookies' => App\Http\Middleware\EncryptCookies::class,
     ],
 
+    //prefix the csrf-cookie route https://stackoverflow.com/questions/61840395/laravel-sanctum-change-csrf-cookie-route
+    'prefix' => 'api'
 ];
