@@ -2,15 +2,17 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\AllowedDomain;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class AllowedDomainsSeeder extends Seeder {
     public function run() {
-        DB::table('allowed_domains')->insert([
-            ['name' => 'theovier.de'],
-            ['name' => 'example.com']
+        AllowedDomain::factory(3)->create();
+        AllowedDomain::factory()->create([
+            'name' => "theovier.de"
+        ]);
+        AllowedDomain::factory()->create([
+            'name' => "example.com"
         ]);
     }
 }
