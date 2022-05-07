@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Hash;
 
 class SignUpController extends Controller {
 
@@ -14,7 +13,7 @@ class SignUpController extends Controller {
         $user = User::create([
             'name' => $request->input("name"),
             'email' => $request->input("email"),
-            'password' => Hash::make($request->input("password")), //todo make the has part of the user model
+            'password' => $request->input("password"),
         ]);
         event(new Registered($user));
         return response(status: 201);
