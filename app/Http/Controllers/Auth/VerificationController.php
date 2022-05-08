@@ -12,24 +12,21 @@ use Illuminate\Http\Request;
 
 class VerificationController extends Controller {
 
+    private $successURL = "email/verify/success";
+    private $alreadyVerifiedURL = "email/verify/already-success";
+
     public function verify(Request $request): RedirectResponse {
-        if (! hash_equals((string) $request->route('id'), (string) $request->user()->getKey())) {
-            throw new AuthorizationException;
-        }
-        if (! hash_equals((string) $request->route('hash'), sha1($request->user()->getEmailForVerification()))) {
-            throw new AuthorizationException;
-        }
         $user = User::find($request->route('id'));
 
         if ($user->hasVerifiedEmail()) {
-            return redirect(env('FRONT_URL') . '/email/verify/already-success');
+            return redirect()->away(env('APP_FRONTEND_URL') . $this->alreadyVerifiedURL);
         }
 
         if ($user->markEmailAsVerified()) {
             event(new Verified($user));
         }
 
-        return redirect(env('FRONT_URL') . '/email/verify/success');
+        return redirect()->away(env('APP_FRONTEND_URL') .  $this->successURL);
     }
 
     public function resend(Request $request) {
