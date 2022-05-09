@@ -10,7 +10,7 @@ class SignUpRequest extends FormRequest {
         return [
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users', new EmailDomain()],
             'password' => ['required', 'string', 'min:8',],
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'alpha_dash', 'string', 'max:255'],
         ];
     }
 }
