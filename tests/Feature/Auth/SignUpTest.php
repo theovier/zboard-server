@@ -3,6 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\AllowedDomain;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -52,6 +53,22 @@ class SignUpTest extends TestCase {
         $this->postJson('/api/signup', $data);
 
         Storage::disk('local')->assertExists('avatars/' . $image->hashName());
+    }
+
+    public function test_uploaded_picture_is_associated_with_user() {
+        $image = UploadedFile::fake()->image('avatar.jpg');
+        $data = [
+            'email' => 'example@example.com',
+            'password' => 'password',
+            'name' => 'TestUser',
+            'picture' => $image
+        ];
+
+        $this->postJson('/api/signup', $data);
+
+        $user = User::where('email', $data['email'])
+            ->first();
+        $this->assertNotNull($user->image);
     }
 
     /**

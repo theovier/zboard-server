@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class SignUpController extends Controller {
@@ -20,8 +20,12 @@ class SignUpController extends Controller {
 
         if ($request->has('picture')) {
             $path = Storage::putFile('avatars', $request->file('picture'));
-            //todo create image relationship on user
-            Log::debug($path);
+            $avatar = Image::make([
+                'URL' => $path,
+                'imageable_type' => User::class,
+                'imageable_id' => $user
+            ]);
+            $user->image()->save($avatar);
         }
 
         event(new Registered($user));
