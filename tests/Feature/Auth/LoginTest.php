@@ -11,7 +11,7 @@ class LoginTest extends TestCase {
 
     public function test_user_can_login_with_correct_credentials() {
         $user = User::factory()->create([
-            'password' => bcrypt($password = 'secret'),
+            'password' => $password = 'secret',
         ]);
 
         $response = $this->postJson('/api/login', [
@@ -31,5 +31,19 @@ class LoginTest extends TestCase {
 
         $response->assertUnauthorized();
         $this->assertGuest();
+    }
+
+    public function test_user_cannot_login_without_verified_email() {
+        $user = User::factory()->create([
+            'password' => $password = 'secret',
+            'email_verified_at' => null
+        ]);
+
+        $response = $this->postJson('/api/login', [
+            'email' => $user->email,
+            'password' => $password,
+        ]);
+
+        $response->assertUnauthorized();
     }
 }
