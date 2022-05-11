@@ -16,6 +16,6 @@ class EmailDomain implements Rule {
     }
 
     public function message() {
-        return ':attribute is not allowed as email domain.';
+        return 'The email domain is not allowed.';
     }
 }

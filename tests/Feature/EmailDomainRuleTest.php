@@ -35,7 +35,7 @@ class EmailDomainRuleTest extends TestCase {
      * @dataProvider invalidEmailAddresses
      */
     public function testInvalidEmailAddressesFail($email) {
-        $this->assertFalse($this->rule->passes('test', $email));
+        $this->assertFalse($this->rule->passes('email', $email));
     }
 
     public function validEmailAddresses(): array {
