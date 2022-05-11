@@ -33,4 +33,8 @@ class User extends Authenticatable implements MustVerifyEmail {
             set: fn ($value) => Hash::make($value)
         );
     }
+
+    public function isVerified(): bool {
+        return $this->email_verified_at != null;
+    }
 }
