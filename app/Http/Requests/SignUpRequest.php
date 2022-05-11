@@ -11,6 +11,7 @@ class SignUpRequest extends FormRequest {
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users', new EmailDomain()],
             'password' => ['required', 'string', 'min:8',],
             'name' => ['required', 'alpha_dash', 'string', 'max:255'],
+            'picture' => ['image', 'max:10240']
         ];
     }
 }
