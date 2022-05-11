@@ -75,6 +75,10 @@ class SignUpTest extends TestCase {
      * @dataProvider invalidInputs
      */
     public function test_invalid_inputs($data) {
+        User::create([
+            'email' => 'alreadyTakenEmail@example.com',
+            'password' => 'password',
+            'name' => 'dummy']);
         $this
             ->postJson('/api/signup', $data)
             ->assertUnprocessable();
@@ -96,6 +100,14 @@ class SignUpTest extends TestCase {
                     'email' => 'example@example.com',
                     'password' => 'password',
                     'name' => 'Test$$$User',
+                ]
+            ],
+
+            [
+                [
+                    'email' => 'alreadyTakenEmail@example.com',
+                    'password' => 'password',
+                    'name' => 'TestUser',
                 ]
             ],
 
