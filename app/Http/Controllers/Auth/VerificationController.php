@@ -3,38 +3,39 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\VerifiesEmails;
+use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Events\Verified;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class VerificationController extends Controller {
-    /*
-    |--------------------------------------------------------------------------
-    | Email Verification Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be re-sent if the user didn't receive the original email message.
-    |
-    */
 
-    use VerifiesEmails;
+    private $successURL = "email/verify/success";
+    private $alreadyVerifiedURL = "email/verify/already-success";
 
-    /**
-     * Where to redirect users after verification.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    public function verify(Request $request): RedirectResponse {
+        $user = User::find($request->route('id'));
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->middleware('auth');
-        $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->away(env('APP_FRONTEND_URL') . $this->alreadyVerifiedURL);
+        }
+
+        if ($user->markEmailAsVerified()) {
+            event(new Verified($user));
+        }
+
+        return redirect()->away(env('APP_FRONTEND_URL') .  $this->successURL);
     }
+
+    public function resend(Request $request) {
+        if ($request->user()->hasVerifiedEmail()) {
+            return response(status: 204);
+        }
+        $request->user()->sendEmailVerificationNotification();
+
+        return new JsonResponse(['message' => 'Verification link sent.'], 202);
+    }
+
 }
