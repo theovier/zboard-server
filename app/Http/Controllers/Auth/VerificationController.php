@@ -12,8 +12,8 @@ use Illuminate\Http\Request;
 
 class VerificationController extends Controller {
 
-    private $successURL = "email/verify/success";
-    private $alreadyVerifiedURL = "email/verify/already-success";
+    private $successURL = "/email/verify/success";
+    private $alreadyVerifiedURL = "/email/verify/already-success";
 
     public function verify(Request $request): RedirectResponse {
         $user = User::find($request->route('id'));
