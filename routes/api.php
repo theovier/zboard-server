@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\PostController;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,10 +16,7 @@ Route::get("heartbeat", function() {
     ];
 });
 
-Route::get("users", function() {
-    return User::all();
-});
-
+Route::apiResource("posts", PostController::class); //todo move under auth
 
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])
     ->middleware(['signed', 'throttle:6,1'])
