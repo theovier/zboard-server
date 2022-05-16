@@ -4,6 +4,7 @@ namespace Tests\Feature\Post;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CreatePostTest extends TestCase {
@@ -73,7 +74,91 @@ class CreatePostTest extends TestCase {
         $this->assertDatabaseMissing('posts', $payload);
     }
 
-    //todo test for valid/invalid inputs once the form validation is created
+    /**
+     * @dataProvider validInputs
+     */
+    public function test_valid_inputs($payload) {
+        $user = User::factory()->create();
 
+        $response = $this
+            ->actingAs($user)
+            ->postJson('api/posts', $payload);
+
+        $response->assertCreated();
+    }
+
+    /**
+     * @dataProvider invalidInputs
+     */
+    public function test_invalid_inputs($payload) {
+        $user = User::factory()->create();
+
+        $response = $this
+            ->actingAs($user)
+            ->postJson('api/posts', $payload);
+
+        $response->assertUnprocessable();
+    }
+
+    private function validInputs(): array {
+        return [
+            [
+                [
+                    'title' => 'My Title',
+                    'content' => 'My Content'
+                ]
+            ],
+            [
+                [
+                    'title' => 'My Title',
+                    'content' => null
+                ]
+            ],
+            [
+                [
+                    'title' => 'My Title',
+                ]
+            ],
+            [
+                [
+                    'title' => Str::random(150),
+                    'content' => Str::random(65000)
+                ]
+            ]
+        ];
+    }
+
+    private function invalidInputs(): array {
+        return [
+            [
+                [
+
+                ]
+            ],
+            [
+                [
+                    'title' => Str::random(501),
+                    'content' => Str::random(65001),
+                ]
+            ],
+            [
+                [
+                    'title' => Str::random(150),
+                    'content' => Str::random(65001)
+                ]
+            ],
+            [
+                [
+                    'content' => Str::random(500)
+                ]
+            ],
+            [
+                [
+                    'title' => null,
+                    'content' => Str::random(500)
+                ]
+            ]
+        ];
+    }
 }
 
