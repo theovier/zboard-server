@@ -14,17 +14,16 @@ class PostController extends Controller {
         return PostResource::collection(Post::all());
     }
 
-    public function show(): PostResource {
-        return new PostResource($this);
+    public function show(Post $post): PostResource {
+        return new PostResource($post);
     }
 
     public function store(StorePostRequest $request): Response {
-        //todo
-        return Response(null, 501);
+        return Response(null, 501); //todo
     }
 
     public function destroy(Post $post): Response {
-        //todo check if the user requesting the deletion is the author, otherwise deny it.
+        $this->authorize('delete', $post);
         $post->delete();
         return response()->noContent();
     }

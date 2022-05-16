@@ -12,7 +12,7 @@ class Post extends Model {
     protected $fillable = [
         'title',
         'content',
-        'author',
+        'author_id',
     ];
 
     public function author(): BelongsTo {

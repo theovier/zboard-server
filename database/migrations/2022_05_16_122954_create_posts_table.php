@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->id();
             $table->string("title");
             $table->string("content")->nullable();
-            $table->foreignIdFor(User::class, "author_id");
+            $table->foreignIdFor(User::class, "author_id"); //todo make it nullable for system generated posts?
             $table->timestamps();
         });
     }
