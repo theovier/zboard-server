@@ -16,7 +16,8 @@ Route::get("heartbeat", function() {
     ];
 });
 
-Route::apiResource("posts", PostController::class); //todo move under auth
+Route::apiResource("posts", PostController::class)
+    ->except("update"); //todo move under auth
 
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])
     ->middleware(['signed', 'throttle:6,1'])

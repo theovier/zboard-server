@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Posts\StorePostRequest;
-use App\Http\Requests\Posts\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -20,11 +19,6 @@ class PostController extends Controller {
     }
 
     public function store(StorePostRequest $request): Response {
-        //todo
-        return Response(null, 501);
-    }
-
-    public function update(UpdatePostRequest $request, Post $post): Response {
         //todo
         return Response(null, 501);
     }
