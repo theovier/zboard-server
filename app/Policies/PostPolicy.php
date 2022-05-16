@@ -10,6 +10,13 @@ use Illuminate\Auth\Access\Response;
 class PostPolicy {
     use HandlesAuthorization;
 
+    public function create(User $user): Response|bool  {
+        return $user->isVerified()
+            ? Response::allow()
+            : Response::deny('Only verified users may create posts.');
+
+    }
+
     public function delete(User $user, Post $post): Response|bool {
         return $post->isAuthor($user)
             ? Response::allow()

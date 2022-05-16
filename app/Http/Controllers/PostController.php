@@ -7,6 +7,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller {
 
@@ -18,8 +19,14 @@ class PostController extends Controller {
         return new PostResource($post);
     }
 
-    public function store(StorePostRequest $request): Response {
-        return Response(null, 501); //todo
+    public function store(StorePostRequest $request): PostResource {
+        $this->authorize('create', Post::class);
+        $post = Post::create([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'author_id' => Auth::user()->id
+        ]);
+        return new PostResource($post);
     }
 
     public function destroy(Post $post): Response {

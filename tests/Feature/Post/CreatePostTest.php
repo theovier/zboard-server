@@ -16,10 +16,12 @@ class CreatePostTest extends TestCase {
             'content' => 'My Content'
         ];
 
-        $response = $this->actingAs($user)
+        $response = $this
+            ->actingAs($user)
             ->postJson('api/posts', $payload);
 
-        $response->assertStatus(201)
+        $response
+            ->assertCreated()
             ->assertJsonStructure([
                 'data' => [
                     'id',
@@ -37,6 +39,28 @@ class CreatePostTest extends TestCase {
         $this->assertDatabaseHas('posts', $payload);
     }
 
+    public function test_author_is_correctly_set() {
+        $author = User::factory()->create();
+        $payload = [
+            'title' => 'My Title',
+            'content' => 'My Content'
+        ];
+
+        $response = $this
+            ->actingAs($author)
+            ->postJson('api/posts', $payload);
+
+        $response
+            ->assertCreated()
+            ->assertJsonFragment([
+                'author' => [
+                    'id' => $author->id,
+                    'name' => $author->name,
+                    'profile_picture' => null
+                ]
+            ]);
+    }
+
     public function test_unauthenticated_user_cannot_create_post() {
         $payload = [
             'title' => 'My Test Title',
@@ -45,8 +69,7 @@ class CreatePostTest extends TestCase {
 
         $response = $this->postJson('api/posts', $payload);
 
-        $response->assertForbidden()
-            ->assertJsonStructure(['error']);
+        $response->assertUnauthorized();
         $this->assertDatabaseMissing('posts', $payload);
     }
 
