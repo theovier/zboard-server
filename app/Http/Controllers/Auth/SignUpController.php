@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SignUpRequest;
+use App\Http\Requests\Auth\SignUpRequest;
 use App\Models\Image;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
