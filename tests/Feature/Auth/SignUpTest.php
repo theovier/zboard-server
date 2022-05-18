@@ -52,7 +52,7 @@ class SignUpTest extends TestCase {
 
         $this->postJson('/api/signup', $data);
 
-        Storage::disk('local')->assertExists('avatars/' . $image->hashName());
+        Storage::disk('local')->assertExists('images/' . $image->hashName());
     }
 
     public function test_uploaded_picture_is_associated_with_user() {

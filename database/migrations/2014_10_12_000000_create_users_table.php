@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignIdFor(Company::class)->nullable();
             $table->string('password');
+            $table->string('profile_picture_url')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

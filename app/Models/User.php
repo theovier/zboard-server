@@ -20,7 +20,8 @@ class User extends Authenticatable implements MustVerifyEmail {
         'name',
         'email',
         'password',
-        'company_id'
+        'company_id',
+        'profile_picture_url'
     ];
 
     protected $hidden = [
@@ -31,10 +32,6 @@ class User extends Authenticatable implements MustVerifyEmail {
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function image(): MorphOne {
-        return $this->morphOne(Image::class, 'imageable');
-    }
 
     public function posts(): HasMany {
         return $this->hasMany(Post::class, "author_id");
