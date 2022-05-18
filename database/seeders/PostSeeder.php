@@ -38,6 +38,39 @@ class PostSeeder extends Seeder {
             'author_id' => 3
         ]);
 
-        Post::factory(6)->create();
+        Post::factory()->create([
+            'title' => 'Kegelklub sucht Verstärkung!',
+            'content' => 'Wir suchen Dich! Unser Kegelklub "Les Miserabowls" braucht dringend Verstärkung!
+                          Wir treffen uns immer Montag Abends um 20:00 Uhr im Klubhaus an der Musterstraße.
+                          Anfänger sind auch gerne willkommen!',
+            'author_id' => 5
+        ]);
+
+        Post::factory()->create([
+            'title' => 'Party People!111!',
+            'content' => 'Dicke Fete auf dem Campus am Sonntag! Ihr seid alle eingeladen.',
+            'author_id' => 6
+        ]);
+
+        Post::factory()->create([
+            'title' => 'Verkaufe Tiger',
+            'content' => '5 Jahre alt, 178cm groß, orange-schwarz gestreift. Er
+						ist ganz lieb und zutraulich. Er war der Tiger in
+						Hangover. Er isst hauptsächlich nervige
+						Menschen, die nicht anklopfen.',
+            'author_id' => 7
+        ]);
+
+        Post::factory()->create([
+            'title' => 'Karten für das Spiel Dortmund-Schalke abzugeben',
+            'content' => 'Da ich es am Samstag leider nicht schaffe selbst in Stadtion zu gehen, verschenke ich meine Karte.',
+            'author_id' => 5
+        ]);
+
+        Post::factory()->create([
+            'title' => 'Wer das hier liest...',
+            'content' => 'dem wünsche ich einen unglaublich schönen Tag! :-)',
+            'author_id' => 8
+        ]);
     }
 }
