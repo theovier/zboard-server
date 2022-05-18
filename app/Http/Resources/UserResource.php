@@ -12,7 +12,7 @@ class UserResource extends JsonResource {
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'avatar_url' => null, //todo
+            'profile_picture_url' => null, //todo
             'company' => $this->company ? new CompanyResource($this->company) : null
         ];
     }

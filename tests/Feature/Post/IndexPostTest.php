@@ -28,19 +28,17 @@ class IndexPostTest extends TestCase {
         $this->getJson('/api/posts')
             ->assertSuccessful()
             ->assertJsonStructure([
-                'data' => [
-                    '*' => [
+                '*' => [
+                    'id',
+                    'author' => [
                         'id',
-                        'author' => [
-                            'id',
-                            'name',
-                            'profile_picture'
-                        ],
-                        'title',
-                        'content',
-                        'created_at',
-                        'updated_at',
-                    ]
+                        'name',
+                        'profile_picture_url'
+                    ],
+                    'title',
+                    'content',
+                    'created_at',
+                    'updated_at',
                 ]
             ]);
     }

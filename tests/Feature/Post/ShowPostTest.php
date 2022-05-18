@@ -28,24 +28,26 @@ class ShowPostTest extends TestCase {
         $this->getJson('/api/posts/1')
             ->assertSuccessful()
             ->assertJsonStructure([
-                'data' => [
+                'id',
+                'author' => [
                     'id',
-                    'author' => [
-                        'id',
-                        'name',
-                        'profile_picture'
-                    ],
-                    'title',
-                    'content',
-                    'created_at',
-                    'updated_at',
-                ]
+                    'name',
+                    'profile_picture_url',
+                    'company' => [
+                        'name'
+                    ]
+                ],
+                'title',
+                'content',
+                'created_at',
+                'updated_at',
             ]);
     }
 
     public function test_post_is_shown_correctly() {
         $author = User::factory()->create([
-            'name' => 'Au Thor'
+            'name' => 'Au Thor',
+            'company_id' => null
         ]);
         $post = Post::factory()->create([
             'title' => 'My Title',
@@ -57,18 +59,17 @@ class ShowPostTest extends TestCase {
 
         $response->assertSuccessful()
             ->assertExactJson([
-                'data' => [
-                    'id' => $post->id,
-                    'title' => $post->title,
-                    'content' => $post->content,
-                    'author' => [
-                        'id' => $author->id,
-                        'name' => $author->name,
-                        'profile_picture' => null
-                    ],
-                    'created_at' => $post->created_at,
-                    'updated_at' => $post->updated_at
-                ]
+                'id' => $post->id,
+                'title' => $post->title,
+                'content' => $post->content,
+                'author' => [
+                    'id' => $author->id,
+                    'name' => $author->name,
+                    'profile_picture_url' => null,
+                    'company' => null
+                ],
+                'created_at' => $post->created_at,
+                'updated_at' => $post->updated_at
             ]);
     }
 

@@ -19,5 +19,8 @@ class CompanySeeder extends Seeder {
         Company::factory()->create([
             'name' => 'Fraunhofer'
         ]);
+        Company::factory()->create([
+            'name' => 'Weidmüller Interface GmbH'
+        ]);
     }
 }
