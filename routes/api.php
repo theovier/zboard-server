@@ -17,10 +17,6 @@ Route::get("heartbeat", function() {
     ];
 });
 
-//todo remove after tinkering
-Route::get('/comments', [CommentController::class, 'index']);
-
-
 //auth
 Route::post("login", [LoginController::class, "login"]);
 Route::post("signup", [SignUpController::class, "signup"]);
