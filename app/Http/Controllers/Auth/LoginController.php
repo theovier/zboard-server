@@ -12,7 +12,7 @@ class LoginController extends Controller {
         if (Auth::attempt($request->only(['email', 'password']))) {
             $user = Auth::user();
             if ($user->isVerified()) {
-                return response(status: 204);
+                return response()->noContent();
             } else {
                 //todo should not send this security related piece of information, but o.k. for prototype
                 return response(["msg" => "Email not yet verified"], 401);

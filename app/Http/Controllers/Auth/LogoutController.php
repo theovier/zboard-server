@@ -9,6 +9,6 @@ class LogoutController extends Controller {
 
     public function logout(Request $request) {
         auth()->guard('web')->logout(); //see https://github.com/laravel/sanctum/issues/87
-        return response(status: 204);
+        return response()->noContent();
     }
 }
