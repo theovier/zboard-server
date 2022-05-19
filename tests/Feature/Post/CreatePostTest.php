@@ -24,24 +24,24 @@ class CreatePostTest extends TestCase {
         $response
             ->assertCreated()
             ->assertJsonStructure([
-                'data' => [
+                'id',
+                'author' => [
                     'id',
-                    'author' => [
-                        'id',
-                        'name',
-                        'profile_picture'
-                    ],
-                    'title',
-                    'content',
-                    'created_at',
-                    'updated_at',
-                ]
+                    'name',
+                    'profile_picture_url'
+                ],
+                'title',
+                'content',
+                'created_at',
+                'updated_at',
             ]);
         $this->assertDatabaseHas('posts', $payload);
     }
 
     public function test_author_is_correctly_set() {
-        $author = User::factory()->create();
+        $author = User::factory()->create([
+            'company_id' => null
+        ]);
         $payload = [
             'title' => 'My Title',
             'content' => 'My Content'
@@ -57,7 +57,8 @@ class CreatePostTest extends TestCase {
                 'author' => [
                     'id' => $author->id,
                     'name' => $author->name,
-                    'profile_picture' => null
+                    'profile_picture_url' => null,
+                    'company' => null
                 ]
             ]);
     }

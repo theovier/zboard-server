@@ -12,8 +12,7 @@ class UpdatePostTest extends TestCase {
 
     public function test_update_post_endpoint_not_available() {
         $this->putJson('/api/posts/1')
-            ->assertStatus(Response::HTTP_METHOD_NOT_ALLOWED)
-            ->assertJsonStructure(['error']);
+            ->assertStatus(Response::HTTP_METHOD_NOT_ALLOWED);
     }
 }
 

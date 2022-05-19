@@ -15,13 +15,13 @@ class IndexPostTest extends TestCase {
         $this->actingAs($authenticatedUser)
             ->getJson('/api/posts')
             ->assertSuccessful()
-            ->assertJsonCount(10, 'data');
+            ->assertJsonCount(9);
     }
 
     public function test_unauthenticated_user_can_get_all_posts() {
         $this->getJson('/api/posts')
             ->assertSuccessful()
-            ->assertJsonCount(10, 'data');
+            ->assertJsonCount(9);
     }
 
     public function test_index_returns_data_in_valid_format() {
