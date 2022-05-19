@@ -10,7 +10,9 @@ class CommentResource extends JsonResource {
 
     public function toArray($request): array|JsonSerializable|Arrayable {
         return [
-
+            'author' => new UserResource($this->author),
+            'content' => $this->content,
+            'post' => new PostResource($this->post)
         ];
     }
 }
