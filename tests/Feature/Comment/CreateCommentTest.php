@@ -115,6 +115,7 @@ class CreateCommentTest extends TestCase {
             ->postJson('api/comments', $payload);
 
         $response->assertUnprocessable();
+        Mail::assertNothingSent();
     }
 
     private function validInputs(): array {
