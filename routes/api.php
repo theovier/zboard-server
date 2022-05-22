@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -38,9 +39,11 @@ Route::middleware('auth:sanctum')->group(function() {
         return $request->user();
     });
 
-    Route::delete('posts/{post}', [PostController::class, 'destroy']); //has to be /{posts}; /{id} is not working with type-hinting
+    Route::delete('posts/{post}', [PostController::class, 'destroy']);
     Route::post('posts', [PostController::class, 'store']);
 
+    Route::post('comments', [CommentController::class, 'store']);
+
     Route::apiResource("posts", PostController::class)
-        ->only("create", "delete");
+        ->only("create", "delete"); //todo remove
 });
