@@ -7,6 +7,6 @@ echo "Deploy Process started ..."
 git pull origin main
 
 # Connect to the Laravel docker container
-docker exec -i api bash < build.sh
+docker exec -i api bash < .scripts/build.sh
 
 echo "Deploy Process finished!"
