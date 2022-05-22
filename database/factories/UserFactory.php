@@ -27,4 +27,12 @@ class UserFactory extends Factory {
             ];
         });
     }
+
+    public function unemployed() {
+        return $this->state(function (array $attributes) {
+            return [
+                'company_id' => null,
+            ];
+        });
+    }
 }

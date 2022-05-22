@@ -16,12 +16,6 @@ class EmailDomainRuleTest extends TestCase {
     public function setUp(): void {
         parent::setUp();
         $this->rule = new EmailDomain();
-        AllowedDomain::factory()->create([
-            'name' => "theovier.de"
-        ]);
-        AllowedDomain::factory()->create([
-            'name' => "example.com"
-        ]);
     }
 
     /**
