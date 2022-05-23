@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\Hello;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignUpController;
@@ -16,6 +17,14 @@ Route::get("heartbeat", function() {
         "hello" => "world"
     ];
 });
+
+
+Route::get("broadcast", function() {
+   broadcast(new Hello());
+});
+
+
+
 
 //auth
 Route::post("login", [LoginController::class, "login"]);
