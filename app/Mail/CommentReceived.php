@@ -18,7 +18,6 @@ class CommentReceived extends Mailable {
 
     public function build() {
         return $this
-            ->from($this->comment->author->email, $this->comment->author->name)
             ->markdown('emails.posts.comments.received', [
                 'comment' => $this->comment
             ]);

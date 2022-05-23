@@ -14,7 +14,7 @@
 <img src="{{ $comment->author->profile_picture_url }}" style="object-fit: cover; width:75px; height: 75px; border-radius: 50%;" alt="Profile Picture Commentator">
 @endif
 
-## {{ $comment->author->name }} ({{ $comment->author->email }}) replied:
+## {{ $comment->author->name }} (<a href="mailto:{{$comment->author->email}}">{{ $comment->author->email }}</a>) replied:
 
 > {{ $comment->content }}
 
