@@ -1,12 +1,12 @@
 <?php
 
-use App\Events\Hello;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,11 +17,9 @@ Route::get("heartbeat", function() {
 });
 
 
-Route::get("broadcast", function() {
-   broadcast(new Hello());
+Route::get("create-random-post", function() {
+    Post::factory()->create();
 });
-
-
 
 
 //auth
