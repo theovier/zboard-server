@@ -6,8 +6,7 @@ use App\Http\Controllers\Auth\SignUpController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
-use App\Http\Resources\UserResource;
-use App\Models\User;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +15,12 @@ Route::get("heartbeat", function() {
         "hello" => "world"
     ];
 });
+
+
+Route::get("create-random-post", function() {
+    Post::factory()->create();
+});
+
 
 //auth
 Route::post("login", [LoginController::class, "login"]);
