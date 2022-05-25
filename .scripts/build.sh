@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Install Composer dependencies
+composer install
+
 # Clear all caches/routes/configs
 php artisan cache:clear
 php artisan config:clear
