@@ -25,6 +25,10 @@ The code for the deployment can be found in a separate git [repository](https://
 When the server is restarted make sure to connect to its docker container via ```docker exec -it api /bin/bash``` and execute the following commands:
 
 ```bash
+
+#install composer dependencies
+composer install
+
 #clear all caches/routes/configs
 php artisan cache:clear
 php artisan config:clear
@@ -33,3 +37,5 @@ php artisan route:clear
 #migrate and freshly seed the database
 php artisan migrate:fresh --seed
 ```
+
+Make sure to remember updating the .env variables in production, e.g., ```BROADCAST_DRIVER=pusher```.
