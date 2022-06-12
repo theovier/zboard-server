@@ -24,7 +24,7 @@ class SignUpTest extends TestCase {
 
     public function test_user_is_created_after_signup() {
         $data = [
-            'email' => 'example@example.com',
+            'email' => 'example@theovier.de',
             'password' => 'password',
             'name' => 'TestUser',
         ];
