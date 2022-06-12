@@ -16,7 +16,8 @@ class VerificationController extends Controller {
     private $successURL = "/email/verify/success";
     private $alreadyVerifiedURL = "/email/verify/already-success";
 
-    public function verify(EmailVerificationRequest $request): RedirectResponse {
+    public function verify(Request $request): RedirectResponse {
+        //todo look into using EmailVerificationRequest but getKey() fails as we are not authenticated.
         $user = User::find($request->route('id'));
 
         if ($user->hasVerifiedEmail()) {
