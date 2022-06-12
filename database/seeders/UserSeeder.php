@@ -38,7 +38,7 @@ class UserSeeder extends Seeder {
         ]);
 
         User::factory()->create([
-            'name' => 'Lassmiranda De Sivilia',
+            'name' => 'Lara Croft',
             'company_id' => 1,
             'profile_picture_url' => 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974'
         ]);
