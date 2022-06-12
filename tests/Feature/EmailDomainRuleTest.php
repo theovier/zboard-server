@@ -35,7 +35,17 @@ class EmailDomainRuleTest extends TestCase {
     public function validEmailAddresses(): array {
         return [
             ["valid@theovier.de"],
-            ["example@example.com"],
+            ["first.last@theovier.de"],
+            ["first@miele.de"],
+            ["first.last@miele.de"],
+            ["first@uni-paderborn.de"],
+            ["first.last@uni-paderborn.de"],
+            ["first@upb.de"],
+            ["first.last@upb.de"],
+            ["first@sn-invent.de"],
+            ["first.last@sn-invent.de"],
+            ["first@weidmueller.com"],
+            ["first.last@weidmueller.com"],
         ];
     }
 
@@ -45,6 +55,7 @@ class EmailDomainRuleTest extends TestCase {
             ["invalid@theo.vier.de"],
             ["invalid@theo.theovier.de"],
             ["invalid@gmx.de"],
+            ["invalid@mail.upb.de"],
             ["notEvenAnEmailAddress"]
         ];
     }

@@ -12,7 +12,19 @@ class AllowedDomainsSeeder extends Seeder {
             'name' => "theovier.de"
         ]);
         AllowedDomain::factory()->create([
-            'name' => "example.com"
+            'name' => "miele.de"
+        ]);
+        AllowedDomain::factory()->create([
+            'name' => "uni-paderborn.de"
+        ]);
+        AllowedDomain::factory()->create([
+            'name' => "upb.de"
+        ]);
+        AllowedDomain::factory()->create([
+            'name' => "sn-invent.de"
+        ]);
+        AllowedDomain::factory()->create([
+            'name' => "weidmueller.com"
         ]);
     }
 }
